@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Attendance status badges */
+.badge-present {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-late {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-on_leave,
+.badge-absent {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Attendance table styling */
+.attendance-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Modal styling */
+.attendance-notes {
+    white-space: pre-line;
+}
+/* PDF-specific styles */
+@media all {
+    .page-break {
+        display: none;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+        font-size: 12pt;
+    }
+    .print-content {
+        width: 100%;
+        margin: 0;
+        padding: 10mm;
+    }
+    .no-print,
+    .no-print * {
+        display: none !important;
+    }
+    a[href]:after {
+        content: none !important;
+    }
+}
