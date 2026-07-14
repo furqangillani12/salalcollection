@@ -258,8 +258,7 @@
                 <a href="{{ route('shop.home') }}" class="flex items-center group" aria-label="Salal Collection home">
                     <img src="{{ asset('assets/images/brand/almufeed-traders.png') }}"
                          alt="SALAL COLLECTION"
-                         class="h-10 sm:h-11 w-auto transition group-hover:scale-105"
-                         style="max-width:200px;">
+                         class="h-14 sm:h-16 w-auto transition group-hover:scale-105">
                 </a>
             </div>
 
