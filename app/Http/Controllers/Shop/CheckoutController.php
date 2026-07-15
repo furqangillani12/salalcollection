@@ -179,6 +179,29 @@ class CheckoutController extends Controller
 
             $branchId = $items->first()->branch_id ?? \App\Models\Branch::query()->value('id');
 
+            // Every online order is tied to a customer record. A guest checkout
+            // upserts one from the shipping details (matched by phone, else email)
+            // so the buyer always shows up in admin → Customers.
+            if (! $customer) {
+                $phone  = preg_replace('/\D+/', '', (string) ($data['shipping_phone'] ?? ''));
+                $last10 = $phone !== '' ? substr($phone, -10) : null;
+                $customer = \App\Models\Customer::query()
+                    ->when($last10, fn ($q) => $q->whereRaw("RIGHT(REPLACE(REPLACE(REPLACE(phone,'+',''),'-',''),' ',''), 10) = ?", [$last10]))
+                    ->when(! $last10 && ! empty($data['email']), fn ($q) => $q->where('email', $data['email']))
+                    ->first();
+                if (! $customer) {
+                    $customer = \App\Models\Customer::create([
+                        'branch_id'     => $branchId,
+                        'name'          => trim(($data['shipping_first_name'] ?? '') . ' ' . ($data['shipping_last_name'] ?? '')) ?: 'Guest',
+                        'phone'         => $data['shipping_phone'] ?? null,
+                        'email'         => $data['email'] ?? null,
+                        'address'       => trim(($data['shipping_address1'] ?? '') . ' ' . ($data['shipping_address2'] ?? '')),
+                        'barcode'       => \App\Models\Customer::generateBarcode(),
+                        'customer_type' => 'customer',
+                    ]);
+                }
+            }
+
             $order = Order::create([
                 'order_number'     => Order::generateOrderNumber($branchId),
                 'order_source'     => 'online',
