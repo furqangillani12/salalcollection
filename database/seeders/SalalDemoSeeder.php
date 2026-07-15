@@ -45,7 +45,9 @@ class SalalDemoSeeder extends Seeder
             Product::updateOrCreate(
                 ['slug' => $slug],
                 ['branch_id' => $branch->id, 'category_id' => $category->id, 'unit_id' => $unitId,
-                 'name' => $name, 'price' => $price, 'summary' => $summary, 'description' => $desc,
+                 'name' => $name, 'price' => $price, 'sale_price' => $price, 'resale_price' => $price,
+                 'wholesale_price' => $price, 'cost_price' => round($price * 0.6),
+                 'summary' => $summary, 'description' => $desc,
                  'image' => $img, 'stock_quantity' => 50, 'track_inventory' => 0,
                  'is_active' => 1, 'show_on_website' => 1, 'is_featured' => 1, 'sort_order' => $i + 1]
             );

@@ -40,7 +40,7 @@ class CategoryController extends Controller
                 Rule::unique('categories', 'name')->where(fn ($q) => $q->where('branch_id', $scopeBranchId)),
             ],
             'description' => 'nullable|string',
-            'photo'       => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
+            'photo'       => 'nullable|image|mimes:png,jpg,jpeg,webp|max:5120',
         ]);
 
         if ($request->hasFile('photo')) {
@@ -68,7 +68,7 @@ class CategoryController extends Controller
                     ->ignore($category->id),
             ],
             'description' => 'nullable|string',
-            'photo'       => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
+            'photo'       => 'nullable|image|mimes:png,jpg,jpeg,webp|max:5120',
         ]);
 
         if ($request->hasFile('photo')) {
