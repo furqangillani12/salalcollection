@@ -60,24 +60,45 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'name'     => 'required|string|max:191',
-            'email'    => 'required|email|unique:customers,email',
+            'email'    => 'required|email',
             'phone'    => 'nullable|string|max:30',
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
-        $customer = Customer::create([
-            'name'           => $data['name'],
-            'email'          => $data['email'],
-            'phone'          => $data['phone'] ?? null,
-            'password'       => $data['password'],
-            'customer_type'  => 'customer',
-            'loyalty_points' => 0,
-            'credit_enabled' => false,
-            'credit_limit'   => 0,
-            'current_balance'=> 0,
-            'credit_due_days'=> 30,
-            'barcode'        => Customer::generateBarcode(),
-        ]);
+        // An email may already exist as a *guest* customer (created at checkout
+        // with no password). Let registration claim that record by setting a
+        // password on it. Only block if the email already has a real, logged-in
+        // account (password already set).
+        $existing = Customer::where('email', $data['email'])->orderBy('id')->first();
+
+        if ($existing && $existing->password) {
+            return back()
+                ->withErrors(['email' => 'This email is already registered. Please sign in instead.'])
+                ->withInput();
+        }
+
+        if ($existing) {
+            $existing->update([
+                'name'     => $data['name'],
+                'phone'    => $data['phone'] ?? $existing->phone,
+                'password' => $data['password'],
+            ]);
+            $customer = $existing;
+        } else {
+            $customer = Customer::create([
+                'name'           => $data['name'],
+                'email'          => $data['email'],
+                'phone'          => $data['phone'] ?? null,
+                'password'       => $data['password'],
+                'customer_type'  => 'customer',
+                'loyalty_points' => 0,
+                'credit_enabled' => false,
+                'credit_limit'   => 0,
+                'current_balance'=> 0,
+                'credit_due_days'=> 30,
+                'barcode'        => Customer::generateBarcode(),
+            ]);
+        }
 
         Auth::guard('customer')->login($customer);
         $this->cart->mergeGuestIntoCustomer($customer->id);
