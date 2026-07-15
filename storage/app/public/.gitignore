@@ -1,9 +1,8 @@
 *
 !.gitignore
 !products/
-!products/prod1.png
-!products/prod2.png
-!products/prod3.png
+!products/*
 !banners/
-!banners/banner1.jpeg
-!banners/banner2.jpeg
+!banners/*
+!category-photos/
+!category-photos/*
