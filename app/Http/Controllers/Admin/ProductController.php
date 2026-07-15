@@ -46,17 +46,12 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name'             => 'required|string|max:255',
-            'barcode'          => 'nullable|string|unique:products',
             'category_id'      => 'required|exists:categories,id',
             'unit_id'          => 'nullable|exists:units,id',
             'description'      => 'nullable|string',
-            'rank'             => 'nullable|string|max:50', 
+            'rank'             => 'nullable|string|max:50',
             'sale_price'       => 'required|numeric|min:0',
-            'resale_price'     => 'required|numeric|min:0',
-            'wholesale_price'  => 'required|numeric|min:0',
             'cost_price'       => 'required|numeric|min:0',
-            'weight_kg'        => 'nullable|numeric|min:0|decimal:0,4',
-            'weight_g'         => 'nullable|integer|min:0',
             'stock_quantity'   => 'required|numeric|min:0',
             'reorder_level'    => 'required|numeric|min:0',
             'image'            => 'nullable|image|max:5120',
@@ -68,15 +63,11 @@ class ProductController extends Controller
         // Checkbox: present only when ticked, so resolve explicitly.
         $validated['show_on_website'] = $request->boolean('show_on_website');
 
-        if (!empty($validated['weight_kg'])) {
-            $weight = $validated['weight_kg'];
-        } elseif (!empty($validated['weight_g'])) {
-            $weight = $validated['weight_g'] / 1000;
-        } else {
-            $weight = null;
-        }
-        unset($validated['weight_kg'], $validated['weight_g']);
-        $validated['weight'] = $weight;
+        // One "Retail Price" now drives every price column so nothing downstream breaks.
+        $validated['price']           = $validated['sale_price'];
+        $validated['resale_price']    = $validated['sale_price'];
+        $validated['wholesale_price'] = $validated['sale_price'];
+        $validated['weight']          = 0;
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('products', 'public');
@@ -124,17 +115,12 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name'             => 'required|string|max:255',
-            'barcode'          => 'nullable|string|unique:products,barcode,'.$product->id,
             'category_id'      => 'required|exists:categories,id',
-            'unit_id'          => 'nullable|exists:units,id', 
+            'unit_id'          => 'nullable|exists:units,id',
             'description'      => 'nullable|string',
-            'rank'             => 'nullable|string|max:50', 
+            'rank'             => 'nullable|string|max:50',
             'sale_price'       => 'required|numeric|min:0',
-            'resale_price'     => 'required|numeric|min:0',
-            'wholesale_price'  => 'required|numeric|min:0',
             'cost_price'       => 'required|numeric|min:0',
-            'weight_kg'        => 'nullable|numeric|min:0|decimal:0,4',
-            'weight_g'         => 'nullable|integer|min:0',
             'stock_quantity'   => 'required|numeric|min:0',
             'reorder_level'    => 'required|numeric|min:0',
             'image'            => 'nullable|image|max:5120',
@@ -146,17 +132,11 @@ class ProductController extends Controller
         // Checkbox: present only when ticked, so resolve explicitly.
         $validated['show_on_website'] = $request->boolean('show_on_website');
 
-        if (!empty($validated['weight_kg'])) {
-        $weight = $validated['weight_kg'];
-        } elseif (!empty($validated['weight_g'])) {
-            $weight = $validated['weight_g'] / 1000;
-        } else {
-            $weight = null;
-        }
+        // One "Retail Price" drives every price column.
+        $validated['price']           = $validated['sale_price'];
+        $validated['resale_price']    = $validated['sale_price'];
+        $validated['wholesale_price'] = $validated['sale_price'];
 
-        unset($validated['weight_kg'], $validated['weight_g']);
-        $validated['weight'] = $weight;
-        
         if ($request->hasFile('image')) {
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);

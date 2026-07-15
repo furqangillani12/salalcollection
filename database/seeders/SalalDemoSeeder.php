@@ -58,5 +58,10 @@ class SalalDemoSeeder extends Seeder
             Banner::create(['title' => '', 'subtitle' => '', 'cta_text' => '', 'cta_url' => '',
                 'image' => $img, 'position' => 'hero', 'is_active' => 1, 'sort_order' => $so]);
         }
+
+        // Show the online-relevant payment methods + all dispatch methods on the storefront.
+        \App\Models\PaymentMethod::whereIn('name', ['cod', 'jazzcash', 'easypaisa', 'bank'])
+            ->update(['show_on_website' => 1]);
+        \App\Models\DispatchMethod::query()->update(['show_on_website' => 1]);
     }
 }
