@@ -19,15 +19,14 @@
                     </div>
                 @endif
                 <div>
-                    <label class="text-xs font-semibold text-gray-700 mb-1.5 block">Phone or email</label>
+                    <label class="text-xs font-semibold text-gray-700 mb-1.5 block">Email</label>
                     <div style="position:relative;">
-                        <i class="fas fa-user" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:13px;pointer-events:none;"></i>
+                        <i class="fas fa-envelope" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:13px;pointer-events:none;"></i>
                         <input type="text" name="login" required autofocus value="{{ old('login') }}"
-                               placeholder="03xx-xxxxxxx or you@example.com"
+                               placeholder="you@example.com"
                                style="padding-left:40px;"
                                class="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                    <p class="text-[11px] text-gray-400 mt-1">Have a shop account (khata)? Sign in with the phone number on file. Ask us to set your password if you don't have one yet.</p>
                 </div>
                 <div>
                     <label class="text-xs font-semibold text-gray-700 mb-1.5 block">Password</label>
