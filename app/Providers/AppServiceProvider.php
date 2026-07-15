@@ -38,5 +38,14 @@ class AppServiceProvider extends ServiceProvider
         Expense::observe(ExpenseObserver::class);
         Refund::observe(RefundObserver::class);
         Payroll::observe(PayrollObserver::class);
+
+        // Already-authenticated users hitting a guest route (e.g. /login) go to
+        // their proper home: the admin dashboard, or the storefront for customers.
+        \Illuminate\Auth\Middleware\RedirectIfAuthenticated::redirectUsing(function ($request) {
+            if (auth()->guard('customer')->check()) {
+                return route('shop.home');
+            }
+            return route('admin.dashboard');
+        });
     }
 }
