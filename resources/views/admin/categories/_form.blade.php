@@ -18,14 +18,6 @@
         @enderror
     </div>
 
-    <div>
-        <label for="sort_order" class="block text-sm font-medium text-gray-700">Display order</label>
-        <input type="number" name="sort_order" id="sort_order" min="0"
-               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-               value="{{ old('sort_order', $category->sort_order ?? 0) }}">
-        <p class="mt-1 text-xs text-gray-500">Lower number shows first on the website. Each number must be unique — the same number can't be given to two categories (use 0 to leave a category unordered).</p>
-        @error('sort_order')<p class="mt-1 text-sm text-red-600">{{ $message }}</p>@enderror
-    </div>
 
     <div>
         <label class="block text-sm font-medium text-gray-700">Category image</label>

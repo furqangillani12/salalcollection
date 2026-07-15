@@ -102,43 +102,17 @@
                         <td class="px-4 py-3">
                             <div class="flex flex-wrap gap-1">
                                 @if($order->balance_amount > 0 && $order->customer_id)
-                                    <a href="{{ route('admin.customers.khata', $order->customer_id) }}"
+                                    <a href="{{ route('admin.customers.show', $order->customer_id) }}"
                                        class="inline-flex items-center px-2 py-1 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700"
                                        title="Receive Payment">
                                         <i class="fas fa-money-bill-wave mr-1"></i> Pay
                                     </a>
                                 @endif
-                                <a href="{{ route('admin.pos.receipt', $order) }}" target="_blank"
+                                <a href="{{ route('admin.orders.show', $order) }}"
                                    class="inline-flex items-center px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded hover:bg-blue-700"
-                                   title="Print Receipt">
-                                    <i class="fas fa-print mr-1"></i>
+                                   title="View Order">
+                                    <i class="fas fa-eye mr-1"></i> View
                                 </a>
-                                <a href="{{ route('admin.pos.edit', $order) }}"
-                                   class="inline-flex items-center px-2 py-1 bg-yellow-500 text-white text-xs font-medium rounded hover:bg-yellow-600"
-                                   title="Edit Order">
-                                    <i class="fas fa-edit mr-1"></i>
-                                </a>
-                                @if($order->status !== 'cancelled' && $order->status !== 'refunded')
-                                    <form action="{{ route('admin.pos.cancel', $order) }}" method="POST" class="inline"
-                                          onsubmit="return confirm('Cancel order #{{ $order->order_number }}? Stock will be restored.')">
-                                        @csrf
-                                        <button type="submit"
-                                                class="inline-flex items-center px-2 py-1 bg-orange-500 text-white text-xs font-medium rounded hover:bg-orange-600"
-                                                title="Cancel Order">
-                                            <i class="fas fa-ban mr-1"></i> Cancel
-                                        </button>
-                                    </form>
-                                @endif
-                                <form action="{{ route('admin.pos.delete', $order) }}" method="POST" class="inline"
-                                      onsubmit="return confirm('DELETE order #{{ $order->order_number }}? This cannot be undone!')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                            class="inline-flex items-center px-2 py-1 bg-red-600 text-white text-xs font-medium rounded hover:bg-red-700"
-                                            title="Delete Order">
-                                        <i class="fas fa-trash mr-1"></i> Delete
-                                    </button>
-                                </form>
                             </div>
                             @if($order->status === 'cancelled')
                                 <span class="inline-block mt-1 px-2 py-0.5 bg-gray-200 text-gray-600 text-xs rounded-full">Cancelled</span>

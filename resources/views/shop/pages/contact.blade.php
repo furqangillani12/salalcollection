@@ -9,12 +9,15 @@
             <p class="text-gray-600 mt-3 max-w-md mx-auto">We'd love to hear from you. Reach out by phone, WhatsApp or this form.</p>
         </div>
 
+        @php
+            $contactItems = array_values(array_filter([
+                setting('site_phone')    ? ['fa-phone',    'Call us',  setting('site_phone')] : null,
+                setting('site_whatsapp') ? ['fa-whatsapp', 'WhatsApp', setting('site_whatsapp')] : null,
+                ['fa-envelope', 'Email', setting('site_email', 'hello@salalcollection.com')],
+            ]));
+        @endphp
         <div class="grid lg:grid-cols-3 gap-6 reveal-stagger">
-            @foreach ([
-                ['fa-phone',     'Call us',     '+92 300 7951919'],
-                ['fa-whatsapp',  'WhatsApp',    '+92 300 7951919'],
-                ['fa-envelope',  'Email',       'info@almufeed.com.pk'],
-            ] as [$icon, $label, $value])
+            @foreach ($contactItems as [$icon, $label, $value])
                 <div class="bg-white rounded-2xl border border-gray-100 p-6 text-center hover:shadow-lg transition">
                     <span class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center mb-4"
                           style="background:linear-gradient(135deg,#e8f1fb,#d6ecfa);color:var(--brand-navy);">

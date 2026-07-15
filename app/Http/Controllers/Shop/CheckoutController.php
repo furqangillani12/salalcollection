@@ -113,7 +113,7 @@ class CheckoutController extends Controller
             'shipping_province'    => 'nullable|string|max:100',
             'shipping_country'     => 'required|string|max:100',
             'shipping_post_code'   => 'nullable|string|max:20',
-            'dispatch_method'      => ['required', 'string', 'max:100', Rule::in($dispatchNames)],
+            'dispatch_method'      => ['nullable', 'string', 'max:100'],
             'payment_method'       => ['required', 'string', 'max:100', Rule::in($paymentNames)],
             'order_notes_customer' => 'nullable|string|max:1000',
             'email'                => 'required|email|max:191',
@@ -136,6 +136,10 @@ class CheckoutController extends Controller
         $totals   = $this->cart->totals();
         $coupon   = $this->cart->activeCoupon();
         $weight   = $items->sum(fn ($i) => (float) ($i->product?->weight ?? 0) * (float) $i->qty);
+        // Delivery method isn't chosen by the customer here — record a sensible
+        // default (first available method, else "Delivery") so the order/slip work.
+        $data['dispatch_method'] = $data['dispatch_method']
+            ?: (DispatchMethod::onWebsite()->value('name') ?: DispatchMethod::query()->value('name') ?: 'Delivery');
         $delivery = $this->resolveDelivery($data['dispatch_method'], $weight);
 
         // Points redemption (#B) — logged-in customers only, capped so the points

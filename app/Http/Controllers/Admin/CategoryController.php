@@ -34,34 +34,25 @@ class CategoryController extends Controller
         $branchId = $this->branchId();
         $scopeBranchId = ($branchId && $branchId !== 'all') ? $branchId : null;
 
-        // A display-order number (>= 1) must be unique per branch — the same
-        // number can't be given to two categories. 0 means "unset" and may repeat.
-        $sortRules = ['nullable', 'integer', 'min:0'];
-        if ((int) $request->input('sort_order', 0) >= 1) {
-            $sortRules[] = Rule::unique('categories', 'sort_order')->where(fn ($q) => $q->where('branch_id', $scopeBranchId));
-        }
-
         $validated = $request->validate([
             'name' => [
                 'required', 'string', 'max:255',
                 Rule::unique('categories', 'name')->where(fn ($q) => $q->where('branch_id', $scopeBranchId)),
             ],
             'description' => 'nullable|string',
-            'sort_order'  => $sortRules,
             'photo'       => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
-        ], [
-            'sort_order.unique' => 'This display order number is already used by another category. Please pick a different number.',
         ]);
-
-        $validated['sort_order'] = (int) $request->input('sort_order', 0);
 
         if ($request->hasFile('photo')) {
             $validated['photo'] = $request->file('photo')->store('category-photos', 'public');
         }
-
         if ($scopeBranchId) {
             $validated['branch_id'] = $scopeBranchId;
         }
+        // New categories are active and shown on the storefront by default.
+        $validated['is_active'] = 1;
+        $validated['show_on_website'] = 1;
+        $validated['is_featured'] = 1;
 
         Category::create($validated);
         return back()->with('success', 'Category created successfully');
@@ -69,14 +60,6 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-        // Unique display order (>= 1) per branch, ignoring this category itself.
-        $sortRules = ['nullable', 'integer', 'min:0'];
-        if ((int) $request->input('sort_order', 0) >= 1) {
-            $sortRules[] = Rule::unique('categories', 'sort_order')
-                ->where(fn ($q) => $q->where('branch_id', $category->branch_id))
-                ->ignore($category->id);
-        }
-
         $validated = $request->validate([
             'name' => [
                 'required', 'string', 'max:255',
@@ -85,13 +68,8 @@ class CategoryController extends Controller
                     ->ignore($category->id),
             ],
             'description' => 'nullable|string',
-            'sort_order'  => $sortRules,
             'photo'       => 'nullable|image|mimes:png,jpg,jpeg,webp|max:2048',
-        ], [
-            'sort_order.unique' => 'This display order number is already used by another category. Please pick a different number.',
         ]);
-
-        $validated['sort_order'] = (int) $request->input('sort_order', $category->sort_order ?? 0);
 
         if ($request->hasFile('photo')) {
             if ($category->photo && \Storage::disk('public')->exists($category->photo)) {

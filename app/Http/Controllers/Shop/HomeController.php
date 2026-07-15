@@ -15,15 +15,10 @@ class HomeController extends Controller
         $heroBanners = Banner::active()->position('hero')->orderBy('sort_order')->get();
         $midBanners  = Banner::active()->position('mid')->orderBy('sort_order')->limit(10)->get();
 
-        $featuredCategories = Category::onWebsite()->where('is_featured', true)
-            ->orderBy('sort_order')->orderBy('name')->limit(12)->get();
-
-        // Fall back to any website categories when none are flagged "featured",
-        // so the "Shop by category" section is always populated.
-        if ($featuredCategories->isEmpty()) {
-            $featuredCategories = Category::onWebsite()
-                ->orderBy('sort_order')->orderBy('name')->limit(12)->get();
-        }
+        // Show every category that's active + visible on the website (newest-created
+        // first so a freshly added category shows up immediately on the homepage).
+        $featuredCategories = Category::onWebsite()
+            ->orderBy('sort_order')->orderByDesc('id')->limit(12)->get();
 
         // New arrivals first — ordered by updated_at so a freshly ADDED product
         // *or* any product the admin edits/updates bubbles back to the top (stock

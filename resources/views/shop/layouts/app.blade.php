@@ -411,12 +411,11 @@
             <div>
                 <img src="{{ asset('assets/images/brand/almufeed-traders.png') }}"
                      alt="SALAL COLLECTION"
-                     class="h-12 mb-4 brightness-0 invert opacity-90"
-                     style="max-width:200px;">
-                <p class="text-sm text-gray-400 leading-relaxed">Quality and affordability you can trust. {{ setting('site_address', 'PanjGirain, Tehsil Darya Khan, District Bhakkar.') }}</p>
+                     class="h-16 w-16 mb-4 object-contain">
+                <p class="text-sm text-gray-400 leading-relaxed">Premium skincare and beauty — quality you can trust.@if (trim((string) setting('site_address')) !== '') {{ setting('site_address') }}@endif</p>
                 <div class="text-xs text-gray-500 mt-3 space-y-1">
-                    <div><i class="fas fa-phone mr-2"></i> {{ setting('site_phone', '+92 300 7951919') }}</div>
-                    <div><i class="fas fa-envelope mr-2"></i> {{ setting('site_email', 'Amt7212@gmail.com') }}</div>
+                    @if (setting('site_phone'))<div><i class="fas fa-phone mr-2"></i> {{ setting('site_phone') }}</div>@endif
+                    <div><i class="fas fa-envelope mr-2"></i> {{ setting('site_email', 'hello@salalcollection.com') }}</div>
                     @if (setting('site_whatsapp'))
                         <div><i class="fab fa-whatsapp mr-2"></i>
                             <a href="https://wa.me/{{ preg_replace('/\D+/', '', setting('site_whatsapp')) }}" target="_blank" rel="noopener" class="hover:text-white">{{ setting('site_whatsapp') }}</a>

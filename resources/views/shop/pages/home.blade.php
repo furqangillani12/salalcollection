@@ -1,7 +1,7 @@
 @extends('shop.layouts.app')
 
 @section('title', 'Home')
-@section('description', 'SALAL COLLECTION — quality and affordability you can trust. Shop online from our trusted retail in PanjGirain, Bhakkar.')
+@section('description', 'Salal Collection — premium skincare and beauty. Quality face washes, creams and serums, delivered across Pakistan.')
 
 @section('content')
 
@@ -80,7 +80,7 @@
                                 Quality &amp; <span style="color:var(--gold);">affordability</span><br>in every box.
                             </h1>
                             <p class="text-base sm:text-lg text-blue-50/85 max-w-md mt-5">
-                                Hand-picked products from <strong>SALAL COLLECTION</strong> — now online with same-day fulfilment from our shop in PanjGirain.
+                                Premium skincare &amp; beauty from <strong>SALAL COLLECTION</strong> — quality you can trust, delivered across Pakistan.
                             </p>
                             <div class="flex flex-wrap gap-3 mt-8">
                                 <a href="{{ route('shop.catalog') }}" class="btn btn-primary">Shop now <i class="fas fa-arrow-right text-xs"></i></a>
@@ -91,16 +91,6 @@
                 </div>
             @endif
 
-            {{-- stats ribbon (always present, sits above slides) --}}
-            <div class="absolute inset-x-0 bottom-0 z-10">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-7">
-                    <div class="grid grid-cols-3 gap-3 sm:gap-6 max-w-md text-white border-t border-white/20 pt-4">
-                        <div><div class="text-xl sm:text-2xl font-extrabold" style="color:var(--gold);">100%</div><div class="text-[11px] text-white/75 mt-0.5">Authentic</div></div>
-                        <div><div class="text-xl sm:text-2xl font-extrabold" style="color:var(--gold);">{{ $productTotal }}+</div><div class="text-[11px] text-white/75 mt-0.5">Products</div></div>
-                        <div><div class="text-xl sm:text-2xl font-extrabold" style="color:var(--gold);">24/7</div><div class="text-[11px] text-white/75 mt-0.5">Support</div></div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         {{-- arrows + dots --}}

@@ -88,7 +88,7 @@
                                 <td class="px-3 py-3">
                                     <div class="flex items-center gap-2">
                                         @if ($product->image)
-                                            <img src="{{ asset('storage/' . $product->image) }}" class="h-8 w-8 rounded-full object-cover flex-shrink-0">
+                                            <img src="{{ shop_image($product->image) }}" class="h-8 w-8 rounded-full object-cover flex-shrink-0">
                                         @else
                                             <div class="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
                                                 <i class="fas fa-image text-gray-400 text-xs"></i>
@@ -193,7 +193,7 @@
                     {{-- Top: Image + Name + Status --}}
                     <div class="flex items-start gap-3">
                         @if ($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" class="h-12 w-12 rounded-lg object-cover flex-shrink-0">
+                            <img src="{{ shop_image($product->image) }}" class="h-12 w-12 rounded-lg object-cover flex-shrink-0">
                         @else
                             <div class="h-12 w-12 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
                                 <i class="fas fa-image text-gray-300"></i>

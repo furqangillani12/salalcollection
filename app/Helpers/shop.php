@@ -332,7 +332,7 @@ if (!function_exists('shop_image')) {
     /**
      * Resolve a stored image path to a public URL, with a graceful placeholder.
      */
-    function shop_image(?string $path, string $placeholder = 'https://placehold.co/600x750/f5f1e8/0c1f3d?text=Almufeed'): string
+    function shop_image(?string $path, string $placeholder = 'https://placehold.co/600x750/f5f1e8/0c1f3d?text=Salal'): string
     {
         if (empty($path)) return $placeholder;
         if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) return $path;

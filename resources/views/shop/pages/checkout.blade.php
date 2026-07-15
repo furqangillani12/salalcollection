@@ -183,31 +183,8 @@
                     </div>
                 </div>
 
-                {{-- Dispatch method --}}
-                <div class="bg-white rounded-2xl border border-gray-100 p-6">
-                    <h2 class="font-bold text-gray-900 mb-4 flex items-center gap-2"><i class="fas fa-box" style="color:var(--brand-cyan);"></i> Delivery method</h2>
-                    @if ($dispatchMethods->isEmpty())
-                        <p class="text-sm text-gray-500">No delivery methods available right now. Please contact us.</p>
-                    @else
-                        <div class="space-y-2">
-                            @foreach ($dispatchMethods as $dm)
-                                <label class="flex items-start gap-3 p-3 rounded-xl border-2 cursor-pointer transition"
-                                       :class="dispatch === @js($dm->name) ? 'border-blue-500 bg-blue-50/40' : 'border-gray-100 hover:border-gray-200'">
-                                    <input type="radio" name="dispatch_method" value="{{ $dm->name }}" x-model="dispatch" class="text-blue-600 mt-0.5">
-                                    <div class="flex-1">
-                                        <div class="flex items-center justify-between gap-2">
-                                            <span class="font-semibold text-gray-800 text-sm">{{ $dm->name }}</span>
-                                            <span class="text-sm font-bold whitespace-nowrap" style="color:var(--brand-navy);">{{ ($deliveryCharges[$dm->name] ?? 0) > 0 ? shop_price($deliveryCharges[$dm->name]) : 'Free' }}</span>
-                                        </div>
-                                        @if ($dm->note)
-                                            <div class="text-xs text-gray-500 mt-0.5 flex items-start gap-1.5"><i class="fas fa-circle-info text-gray-300 mt-0.5"></i><span>{{ $dm->note }}</span></div>
-                                        @endif
-                                    </div>
-                                </label>
-                            @endforeach
-                        </div>
-                    @endif
-                </div>
+                {{-- Delivery method is not customer-selectable on this site; a default is recorded on the order. --}}
+                <input type="hidden" name="dispatch_method" :value="dispatch">
 
                 @if (shop_is_reseller())
                 {{-- Reseller "From" address (printed as sender on the dispatch slip) --}}
@@ -343,7 +320,7 @@
                         </div>
                     @endif
 
-                    <button type="submit" class="btn btn-primary btn-block mt-5" {{ $dispatchMethods->isEmpty() || $paymentMethods->isEmpty() ? 'disabled' : '' }}><i class="fas fa-lock"></i> Place order</button>
+                    <button type="submit" class="btn btn-primary btn-block mt-5" {{ $paymentMethods->isEmpty() ? 'disabled' : '' }}><i class="fas fa-lock"></i> Place order</button>
                     <p class="text-[11px] text-gray-400 text-center mt-3">By placing your order you agree to our <a href="{{ route('shop.terms') }}" class="underline">terms</a>.</p>
                 </div>
             </aside>
