@@ -273,7 +273,7 @@
             </div>
             <div class="text-xs text-center sm:text-right">
                 &copy; {{ now()->year }} Salal Collection POS. All rights reserved.<br>
-                <span class="text-gray-500">www.almufeed.com.pk</span>
+                <span class="text-gray-500">www.salalcollection.com</span>
             </div>
         </div>
     </footer>

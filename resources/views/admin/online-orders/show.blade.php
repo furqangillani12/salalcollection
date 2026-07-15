@@ -219,7 +219,7 @@
 
                 @if ($order->balance_amount > 0 && $order->status !== 'cancelled')
                     <form method="POST" action="{{ route('admin.online-orders.mark-paid', $order) }}" class="mt-4 pt-4 border-t border-gray-100"
-                          onsubmit="return confirm('Mark this order as fully paid? Customer khata will be reduced.')">
+                          onsubmit="return confirm('Mark this order as fully paid? Customer balance will be updated.')">
                         @csrf @method('PATCH')
                         <input type="text" name="payment_ref" placeholder="Payment ref (optional)"
                                class="w-full px-3 py-2 border border-gray-200 rounded-lg text-xs mb-2 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
@@ -237,9 +237,9 @@
                     <div class="font-bold text-gray-900">{{ $order->customer->name }}</div>
                     <div class="text-xs text-gray-500 mt-0.5">{{ $order->customer->email }}</div>
                     <div class="text-xs text-gray-500">{{ $order->customer->phone }}</div>
-                    <a href="{{ route('admin.customers.khata', $order->customer) }}"
+                    <a href="{{ route('admin.customers.show', $order->customer) }}"
                        class="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold" style="color:#0891b2;">
-                        <i class="fas fa-book-open"></i> Open khata
+                        <i class="fas fa-user"></i> View customer
                     </a>
                 @else
                     <div class="font-bold text-gray-900">{{ $order->shipping_first_name }} {{ $order->shipping_last_name }}</div>

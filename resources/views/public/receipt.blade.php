@@ -667,9 +667,9 @@
             @if ($order->branch && $order->branch->logo)
                 <img src="{{ asset('storage/' . $order->branch->logo) }}" alt="{{ $order->branch->name }}" class="logo" style="max-height:110px;">
             @elseif (file_exists(public_path('assets/images/mufeed.png')))
-                <img src="{{ asset('assets/images/mufeed.png') }}" alt="AlMufeed Saqafti Markaz" class="logo" style="max-height:110px;">
+                <img src="{{ asset('assets/images/mufeed.png') }}" alt="Salal Collection" class="logo" style="max-height:110px;">
             @else
-                <div class="company-name" style="font-size:18px;font-weight:800;margin-top:6px;">{{ $order->branch->name ?? 'AlMufeed Saqafti Markaz' }}</div>
+                <div class="company-name" style="font-size:18px;font-weight:800;margin-top:6px;">{{ $order->branch->name ?? 'Salal Collection' }}</div>
                 <div class="company-contact" style="font-size:12px;color:#6b7280;margin-top:2px;">Phone: {{ $order->branch->phone ?? '03007951919' }}</div>
             @endif
         </div>
@@ -966,7 +966,7 @@
         <div class="receipt-footer">
             <p>Thank you for your business!</p>
             <p>Items can be returned within 7 days with receipt</p>
-            <p style="margin-top:8px;font-size:11px;">{{ $order->branch->name ?? 'AlMufeed Saqafti Markaz' }} | www.almufeed.com.pk | {{ $order->branch->phone ?? '03007951919' }}</p>
+            <p style="margin-top:8px;font-size:11px;">{{ $order->branch->name ?? 'Salal Collection' }} | www.salalcollection.com | {{ $order->branch->phone ?? '03007951919' }}</p>
         </div>
     </div>
 

@@ -145,7 +145,7 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>{{ $order->branch->name ?? 'AlMufeed Saqafti Markaz' }}</h1>
+            <h1>{{ $order->branch->name ?? 'Salal Collection' }}</h1>
             <div class="company-info">
                 <p>Islamic Books & Cultural Items</p>
                 <p>{{ $order->branch->address ?? 'SALAL COLLECTION Traders PanjGirain Tehsil DaryaKhan District Bhakkar' }}</p>

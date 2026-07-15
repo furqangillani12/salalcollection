@@ -82,7 +82,7 @@ class AuthController extends Controller
         Auth::guard('customer')->login($customer);
         $this->cart->mergeGuestIntoCustomer($customer->id);
 
-        return redirect()->route('shop.account')->with('shop_success', 'Welcome to Almufeed!');
+        return redirect()->route('shop.account')->with('shop_success', 'Welcome to Salal Collection!');
     }
 
     public function logout(Request $request)

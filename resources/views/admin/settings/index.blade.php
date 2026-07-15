@@ -33,7 +33,7 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 mb-1">Contact email</label>
-                        <input type="email" name="site_email" value="{{ old('site_email', $site['site_email'] ?? '') }}" placeholder="info@almufeed.com.pk" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
+                        <input type="email" name="site_email" value="{{ old('site_email', $site['site_email'] ?? '') }}" placeholder="hello@salalcollection.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 mb-1">Address</label>

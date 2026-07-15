@@ -207,8 +207,8 @@
 
     {{-- ── Header ── --}}
     <div class="header">
-        <div class="shop-name">{{ strtoupper($order->branch->name ?? 'ALMUFEED SAQAFTI MARKAZ') }}</div>
-        <div class="shop-info">www.almufeed.com.pk</div>
+        <div class="shop-name">{{ strtoupper($order->branch->name ?? 'SALAL COLLECTION') }}</div>
+        <div class="shop-info">www.salalcollection.com</div>
         <div class="shop-info">Ph: {{ $order->branch->phone ?? '03007951919' }}</div>
     </div>
 

@@ -2,12 +2,12 @@
 
 /*
 |--------------------------------------------------------------------------
-| Shop (public storefront) routes — almufeed.com.pk
+| Shop (public storefront) routes — salalcollection.com
 |--------------------------------------------------------------------------
 |
 | In production:
-|     SHOP_DOMAIN=almufeed.com.pk    (in .env)
-|     → Routes match Host: almufeed.com.pk only. POS stays on its subdomain.
+|     SHOP_DOMAIN=salalcollection.com    (in .env)
+|     → Routes match Host: salalcollection.com only. POS stays on its subdomain.
 |
 | In local dev (one host, no DNS):
 |     SHOP_PREFIX=shop                (in .env, default if SHOP_DOMAIN unset)

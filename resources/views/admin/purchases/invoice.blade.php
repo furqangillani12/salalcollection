@@ -342,8 +342,8 @@
 
             {{-- Header --}}
             <div class="inv-header">
-                <h1>ALMufeed Saqafti Markaz</h1>
-                <p>www.almufeed.com.pk | 03007951919</p>
+                <h1>Salal Collection</h1>
+                <p>www.salalcollection.com | 03007951919</p>
                 <div class="inv-badge">PURCHASE INVOICE (خریداری انوائس)</div>
             </div>
 
@@ -490,7 +490,7 @@
 
             {{-- Footer --}}
             <div class="inv-footer">
-                <p>ALMufeed Saqafti Markaz — Purchase Record</p>
+                <p>Salal Collection — Purchase Record</p>
                 <p>This is a computer-generated invoice.</p>
                 <p style="margin-top:6px;font-size:10px;color:#c9c9c9">Generated on {{ now()->format('d M, Y h:i A') }}</p>
             </div>
@@ -525,7 +525,7 @@
             phone = phone.startsWith('0') ? '92' + phone.substring(1) : '92' + phone;
         }
 
-        let msg = `*AlMufeed Saqafti Markaz*\n`;
+        let msg = `*Salal Collection*\n`;
         msg += `*Purchase Invoice (خریداری انوائس)*\n\n`;
         msg += `*Invoice #*: {{ $purchase->invoice_number }}\n`;
         msg += `*Date*: {{ \Carbon\Carbon::parse($purchase->purchase_date)->format('d M, Y') }}\n`;
@@ -541,7 +541,7 @@
         @else
         msg += `*Status*: Fully Paid ✅\n`;
         @endif
-        msg += `\nAlMufeed Saqafti Markaz\n03007951919`;
+        msg += `\nSalal Collection\n03007951919`;
 
         window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
     });

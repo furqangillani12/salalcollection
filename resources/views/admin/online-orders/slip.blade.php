@@ -149,7 +149,7 @@
         'name_ur' => setting('site_name_ur', 'المفید اسلامی ثقافتی مرکز'),
         'phone'   => $branch?->phone ?: setting('site_phone'),
         'addr'    => $branch?->address ?: setting('site_address'),
-        'website' => setting('site_website', 'www.almufeed.com.pk'),
+        'website' => setting('site_website', 'www.salalcollection.com'),
     ];
 
     // "From" (sender) box — controller decides the default per customer type:

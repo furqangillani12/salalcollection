@@ -22,7 +22,7 @@ class StorefrontSeeder extends Seeder
     {
         // ── Brands ──────────────────────────────────────────────────────────
         $brands = [
-            ['name' => 'Almufeed Premium', 'description' => 'Our flagship in-house line.',     'is_featured' => true,  'sort_order' => 1],
+            ['name' => 'Salal Premium', 'description' => 'Our flagship in-house line.',     'is_featured' => true,  'sort_order' => 1],
             ['name' => 'Sajda',            'description' => 'Prayer and worship essentials.',  'is_featured' => true,  'sort_order' => 2],
             ['name' => 'Halal Goods',      'description' => 'Trusted halal-certified items.',  'is_featured' => true,  'sort_order' => 3],
             ['name' => 'Daily Use',        'description' => 'Everyday household must-haves.',  'is_featured' => true,  'sort_order' => 4],

@@ -236,8 +236,8 @@
 
             {{-- Header --}}
             <div class="voucher-header">
-                <h1>ALMufeed Saqafti Markaz</h1>
-                <p>www.almufeed.com.pk | 03007951919</p>
+                <h1>Salal Collection</h1>
+                <p>www.salalcollection.com | 03007951919</p>
                 <div class="voucher-badge {{ $isPayout ? 'payout' : '' }}">{{ $isPayout ? 'PAYOUT VOUCHER' : 'PAYMENT VOUCHER' }}</div>
             </div>
 
@@ -347,7 +347,7 @@
             phone = phone.startsWith('0') ? '92' + phone.substring(1) : '92' + phone;
         }
 
-        let msg = `*AlMufeed Saqafti Markaz*\n`;
+        let msg = `*Salal Collection*\n`;
         msg += `*{{ $isPayout ? 'Payout Voucher' : 'Payment Voucher' }} (رسید)*\n\n`;
         msg += `*Voucher #*: {{ $payment->payment_number }}\n`;
         msg += `*Date*: {{ \Carbon\Carbon::parse($payment->payment_date)->format('d M, Y') }}\n`;
@@ -357,7 +357,7 @@
         msg += `*Balance Before*: Rs. {{ number_format(abs($balanceBefore), 0) }}{{ $balanceBefore > 0 ? ' (Due)' : ($balanceBefore < 0 ? ' (Advance)' : '') }}\n`;
         msg += `*Balance After*: {{ $balanceAfter == 0 ? 'Rs. 0 — Settled ✅' : 'Rs. ' . number_format(abs($balanceAfter), 0) . ($balanceAfter > 0 ? ' (Due)' : ' (Advance)') }}\n\n`;
         msg += `{{ $isPayout ? 'Amount paid out to customer.' : 'Thank you for your payment!' }}\n`;
-        msg += `AlMufeed Saqafti Markaz\n03007951919`;
+        msg += `Salal Collection\n03007951919`;
 
         window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
     });

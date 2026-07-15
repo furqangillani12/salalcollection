@@ -38,8 +38,8 @@
 <div class="receipt">
     <!-- Receipt Header -->
     <div class="header">
-        <h1>{{ $order->branch->name ?? 'ALMufeed Saqafti Markaz' }}</h1>
-        <p>www.almufeed.com.pk</p>
+        <h1>{{ $order->branch->name ?? 'Salal Collection' }}</h1>
+        <p>www.salalcollection.com</p>
         <p>Phone: {{ $order->branch->phone ?? '03007951919' }}</p>
     </div>
 
@@ -111,7 +111,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        <p>Thank you for your purchase at {{ $order->branch->name ?? 'ALMufeed Saqafti Markaz' }}!</p>
+        <p>Thank you for your purchase at {{ $order->branch->name ?? 'Salal Collection' }}!</p>
         <p>Items can be returned within 7 days with receipt.</p>
     </div>
 </div>

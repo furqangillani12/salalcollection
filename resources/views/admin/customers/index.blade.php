@@ -166,11 +166,6 @@
                                         </svg>
                                     </a>
 
-                                    <a href="{{ route('admin.customers.khata', $customer) }}"
-                                        class="text-emerald-600 hover:text-emerald-800 text-xs font-medium"
-                                        title="View Khata">
-                                        📒 Khata
-                                    </a>
 
                                     <a href="{{ route('admin.customers.edit', $customer) }}"
                                         class="text-yellow-600 hover:text-yellow-900 flex items-center" title="Edit">

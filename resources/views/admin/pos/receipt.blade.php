@@ -404,8 +404,8 @@
 
             {{-- Header --}}
             <div class="receipt-header">
-                <h1>{{ $order->branch->name ?? 'ALMufeed Saqafti Markaz' }}</h1>
-                <p>www.almufeed.com.pk</p>
+                <h1>{{ $order->branch->name ?? 'Salal Collection' }}</h1>
+                <p>www.salalcollection.com</p>
                 <p>Phone: {{ $order->branch->phone ?? '03007951919' }}</p>
             </div>
 
@@ -1049,7 +1049,7 @@
                     phone = phone.startsWith('0') ? '92' + phone.substring(1) : '92' + phone;
                 }
 
-                let message = `*{{ $order->branch->name ?? 'AlMufeed Saqafti Markaz' }} - Receipt*\n\n`;
+                let message = `*{{ $order->branch->name ?? 'Salal Collection' }} - Receipt*\n\n`;
                 message += `Dear ${customerName},\n\n`;
                 message += `Thank you for shopping with us!\n\n`;
                 message += `*Receipt #*: {{ $order->order_number }}\n`;
@@ -1080,7 +1080,7 @@
                     @endif
                 @endif
                 message += `\n*View Your Receipt Online:*\n${receiptUrl}\n\n`;
-                message += `*Contact Us:*\n{{ $order->branch->phone ?? '03007951919' }}\nwww.almufeed.com.pk\n\nWe appreciate your purchase!`;
+                message += `*Contact Us:*\n{{ $order->branch->phone ?? '03007951919' }}\nwww.salalcollection.com\n\nWe appreciate your purchase!`;
 
                 window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`, '_blank');
             });
